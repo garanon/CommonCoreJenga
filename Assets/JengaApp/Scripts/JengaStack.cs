@@ -18,7 +18,7 @@ namespace JengaApp
             for (var i = 0; i < config.TotalNumBlocks; ++i)
             {
                 var jengaBlock = objectPool.Get(this.transform, false);
-                CalculateAndSetPosition(jengaBlock, i, config);
+                CalculateAndSetPosition(jengaBlock, i);
 
                 jengaBlock.Initialise();
             }
@@ -28,14 +28,14 @@ namespace JengaApp
 
         #region Private Methods
 
-        private void CalculateAndSetPosition(JengaBlock block, int blockIndex, JengaStackConfig config)
+        private void CalculateAndSetPosition(JengaBlock block, int blockIndex)
         {
-            var rowIndex = blockIndex % config.NumBlocksPerRow;
-            var columnIndex = Mathf.FloorToInt(blockIndex / config.NumBlocksPerRow);
+            var rowIndex = blockIndex % JengaStackConfig.NumBlocksPerRow;
+            var columnIndex = Mathf.FloorToInt(blockIndex / JengaStackConfig.NumBlocksPerRow);
             var isOddRow = columnIndex % 2 > 0;
 
             var position = default(Vector3);
-            position.x = MathUtility.GetEqualSpacedPosition(Vector3.right * blockSpacing, rowIndex, config.NumBlocksPerRow).x;
+            position.x = MathUtility.GetEqualSpacedPosition(Vector3.right * blockSpacing, rowIndex, JengaStackConfig.NumBlocksPerRow).x;
             position.y = columnIndex;
 
             block.transform.localPosition = position;

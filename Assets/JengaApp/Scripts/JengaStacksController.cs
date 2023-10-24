@@ -16,23 +16,6 @@ namespace JengaApp
 
         #endregion
 
-        #region Unity Hooks
-
-        private void Start()
-        {
-            // Initialise an array of jenga stacks.
-            var stackConfigs = new JengaStackConfig[]
-            {
-                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 5 },
-                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 10 },
-                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 20 },
-            };
-
-            Initialise(stackConfigs);
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void Initialise(JengaStackConfig[] configs)

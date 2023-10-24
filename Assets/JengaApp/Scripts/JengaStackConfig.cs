@@ -4,8 +4,15 @@ namespace JengaApp
     {
         #region Properties
 
-        public int NumBlocksPerRow { get; set; }
-        public int TotalNumBlocks { get; set; }
+        public int TotalNumBlocks => Blocks.Length;
+
+        public IJengaBlockData[] Blocks { get; set; }
+
+        #endregion
+
+        #region Fields
+
+        public const int NumBlocksPerRow = 3;
 
         #endregion
     }
