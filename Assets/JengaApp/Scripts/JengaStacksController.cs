@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JengaApp.Utilities;
 using UnityEngine;
 
@@ -5,6 +6,12 @@ namespace JengaApp
 {
     public class JengaStacksController : MonoBehaviour
     {
+        #region Properties
+
+        public List<JengaStack> JengaStacks { get; private set; } = new();
+
+        #endregion
+
         #region Fields
 
         [Header("Object pools")]
@@ -28,6 +35,7 @@ namespace JengaApp
                 jengaStack.transform.localPosition = position;
 
                 jengaStack.Initialise(config, blockObjectPool);
+                JengaStacks.Add(jengaStack);
 
                 ++stackIndex;
             }

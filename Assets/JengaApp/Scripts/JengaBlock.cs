@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace JengaApp
@@ -12,6 +13,7 @@ namespace JengaApp
 
         #region Fields
 
+        [SerializeField] private new Rigidbody rigidbody;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private Material defaultMaterial;
         [SerializeField] private Material glassMaterial;
@@ -27,6 +29,19 @@ namespace JengaApp
             Config = config;
             SetMode(config.BlockType);
 
+        }
+
+        public void WakeUp()
+        {
+            rigidbody.WakeUp();
+            rigidbody.isKinematic = false;
+        }
+
+        public void Sleep()
+        {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.isKinematic = true;
+            rigidbody.Sleep();
         }
 
         public void SetMode(BlockType blockType)
