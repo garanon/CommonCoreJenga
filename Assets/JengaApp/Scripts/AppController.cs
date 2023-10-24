@@ -80,6 +80,7 @@ namespace JengaApp
                 // Create the configs.
                 var config = new JengaStackConfig
                 {
+                    Label = group.Key,
                     Blocks = sortedData
                 };
                 configs.Add(config);

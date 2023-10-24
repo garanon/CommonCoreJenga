@@ -7,6 +7,8 @@ namespace JengaApp
     {
         #region Fields
 
+        [SerializeField] private TMPro.TextMeshPro label;
+
         [SerializeField] private float blockSpacing = 1f;
 
         #endregion
@@ -15,6 +17,10 @@ namespace JengaApp
 
         public void Initialise(JengaStackConfig config, JengaBlockPool objectPool)
         {
+            // Initialise the labels.
+            label.text = config.Label;
+
+            // Initialise the blocks.
             for (var i = 0; i < config.TotalNumBlocks; ++i)
             {
                 var blockConfig = config.Blocks[i];
