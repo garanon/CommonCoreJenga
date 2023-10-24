@@ -1,3 +1,4 @@
+using JengaApp.Utilities;
 using UnityEngine;
 
 namespace JengaApp
@@ -6,8 +7,12 @@ namespace JengaApp
     {
         #region Fields
 
+        [Header("Object pools")]
         [SerializeField] private JengaStackPool stackObjectPool;
         [SerializeField] private JengaBlockPool blockObjectPool;
+
+        [Header("Configuration")]
+        [SerializeField] private float stackSpacing = 5f;
 
         #endregion
 
@@ -18,9 +23,9 @@ namespace JengaApp
             // Initialise an array of jenga stacks.
             var stackConfigs = new JengaStackConfig[]
             {
-                new JengaStackConfig { NumBlocks = 5 },
-                new JengaStackConfig { NumBlocks = 10 },
-                new JengaStackConfig { NumBlocks = 20 },
+                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 5 },
+                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 10 },
+                new JengaStackConfig { NumBlocksPerRow = 3, TotalNumBlocks = 20 },
             };
 
             Initialise(stackConfigs);
@@ -32,10 +37,16 @@ namespace JengaApp
 
         public void Initialise(JengaStackConfig[] configs)
         {
+            var stackIndex = 0;
             foreach (var config in configs)
             {
                 var jengaStack = stackObjectPool.Get(this.transform, false);
+                var position = MathUtility.GetEqualSpacedPosition(Vector3.right * stackSpacing, stackIndex, configs.Length);
+                jengaStack.transform.localPosition = position;
+
                 jengaStack.Initialise(config, blockObjectPool);
+
+                ++stackIndex;
             }
         }
 

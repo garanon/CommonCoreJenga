@@ -4,7 +4,8 @@ namespace JengaApp
     {
         #region Properties
 
-        public int NumBlocks { get; set; }
+        public int NumBlocksPerRow { get; set; }
+        public int TotalNumBlocks { get; set; }
 
         #endregion
     }
