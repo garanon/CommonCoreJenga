@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -17,9 +18,53 @@ namespace JengaApp
 
         private void Start()
         {
-            // TODO: This is temporary and hard-coded. To implement a WebAPIManager.
-            var json = Resources.Load<TextAsset>("json_data");
-            var gradeData = JsonConvert.DeserializeObject<StandardizedGradeJengaBlock[]>(json.text);
+            Debug.Log("Fetching grade data...");
+            DownloadGradeData(OnDataDownloadSuccess, OnDataDownloadFailed);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void DownloadGradeData(Action<string> onSuccess, Action<string> onFailed)
+        {
+            WebAPIManager.Instance.GetDataFromUrl(AppConstants.FetchGradeDataURL, onSuccess, onFailed);
+        }
+
+        private void OnDataDownloadSuccess(string jsonData)
+        {
+            Debug.Log("Grade data downloaded.");
+
+            // Store a version locally.
+            UserProfile.SaveGradeData(jsonData);
+
+            // Initialise the stacks
+            InitialiseJengaStacksFromJson(jsonData);
+        }
+
+        private void OnDataDownloadFailed(string errorMessage)
+        {
+            Debug.LogError($"Failed to download data {errorMessage}.");
+            Debug.Log("Checking for a cached version...");
+
+            // Attempt to load a cached version.
+            if (UserProfile.TryLoadCachedGradeData(out var jsonData))
+            {
+                Debug.Log("Loaded data from file.");
+
+                // Initialise the stacks
+                InitialiseJengaStacksFromJson(jsonData);
+            }
+            else
+            {
+                Debug.LogError($"Failed to fetch grade data.");
+            }
+        }
+
+        private void InitialiseJengaStacksFromJson(string json)
+        {
+            // Parse the data
+            var gradeData = JsonConvert.DeserializeObject<StandardizedGradeJengaBlock[]>(json);
 
             // Split and organise the data.
             var groupedData = gradeData.GroupBy(item => item.Grade);
@@ -40,7 +85,7 @@ namespace JengaApp
                 configs.Add(config);
             }
 
-            // Initialise.
+            // Initialise the jenga stacks.
             stacksController.Initialise(configs.ToArray());
         }
 
