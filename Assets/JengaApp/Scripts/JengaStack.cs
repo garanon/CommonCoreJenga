@@ -17,10 +17,12 @@ namespace JengaApp
         {
             for (var i = 0; i < config.TotalNumBlocks; ++i)
             {
+                var blockConfig = config.Blocks[i];
+
                 var jengaBlock = objectPool.Get(this.transform, false);
                 CalculateAndSetPosition(jengaBlock, i);
 
-                jengaBlock.Initialise();
+                jengaBlock.Initialise(blockConfig);
             }
         }
 

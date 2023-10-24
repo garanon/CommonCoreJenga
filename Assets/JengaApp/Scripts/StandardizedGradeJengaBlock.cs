@@ -9,6 +9,18 @@ namespace JengaApp
     {
         #region Properties
 
+        // IJengaBlockData properties
+        public BlockType BlockType
+        {
+            get
+            {
+                if (!Enum.IsDefined(typeof(BlockType), Mastery))
+                    return BlockType.Invalid;
+
+                return (BlockType)Mastery;
+            }
+        }
+
         // IStandardizedGradeData properties
         public int Id { get; set; }
         public string Subject { get; set; }

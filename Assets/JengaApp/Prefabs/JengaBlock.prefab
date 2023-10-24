@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94baa823bf79349be8e13fcce8b41574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 4596449738632251173}
+  defaultMaterial: {fileID: 2100000, guid: dd7481bd4ade44d4f8d0e54c9571e25c, type: 2}
+  glassMaterial: {fileID: 2100000, guid: 2a930f35c861e48c4ba8d688e9e2fd3d, type: 2}
+  woodMaterial: {fileID: 2100000, guid: db71ff74551a4482681d8e6e467555e2, type: 2}
+  stoneMaterial: {fileID: 2100000, guid: ff8c299b638144ea389fc5590aae881c, type: 2}
 --- !u!54 &2953399119518079472
 Rigidbody:
   m_ObjectHideFlags: 0
