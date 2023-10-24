@@ -29,7 +29,7 @@ namespace JengaApp
                 var sortedData = group
                                     .OrderBy(x => x.Domain)
                                     .ThenBy(x => x.Cluster)
-                                    //.ThenBy(x => x.GetStandardIdSortKey()) // TODO: Organise by standard ID.
+                                    .ThenBy(x => x.GetStandardIdSortKey())
                                     .ToArray();
 
                 // Create the configs.
