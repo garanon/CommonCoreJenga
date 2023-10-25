@@ -36,6 +36,9 @@ namespace JengaApp.Utilities
         public void Release(T pooledObject)
         {
             objectPool.Release(pooledObject);
+
+            if (pooledObject.transform.parent != this.transform)
+                pooledObject.transform.SetParent(this.transform);
         }
 
         #endregion

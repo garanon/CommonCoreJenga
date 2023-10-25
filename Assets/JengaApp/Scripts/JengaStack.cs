@@ -38,7 +38,7 @@ namespace JengaApp
             BuildTower();
         }
 
-        public void ResetStack()
+        public void DestroyTower()
         {
             // Release all the current blocks.
             foreach (var block in JengaBlocks)
@@ -48,16 +48,9 @@ namespace JengaApp
                 if (block.gameObject.activeSelf)
                     objectPool.Release(block);
             }
-
-            // Build the tower from scratch.
-            BuildTower();
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private void BuildTower()
+        public void BuildTower()
         {
             JengaBlocks.Clear();
 
@@ -72,6 +65,10 @@ namespace JengaApp
                 JengaBlocks.Add(jengaBlock);
             }
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void CalculateAndSetPosition(JengaBlock block, int blockIndex)
         {

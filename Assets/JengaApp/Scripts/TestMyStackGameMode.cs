@@ -41,11 +41,12 @@ namespace JengaApp
 
         public override void OnGameModeFinish()
         {
-            // Reset all the stacks.
+            // Destroy and rebuild all towers.
             foreach (var stack in stacksController.JengaStacks)
-            {
-                stack.ResetStack();
-            }
+                stack.DestroyTower();
+
+            foreach (var stack in stacksController.JengaStacks)
+                stack.BuildTower();
         }
 
         #endregion
