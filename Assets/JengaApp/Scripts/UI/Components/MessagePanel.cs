@@ -10,15 +10,6 @@ namespace JengaApp.UI.Components
 
         #endregion
 
-        #region Unity Hooks
-
-        private void Awake()
-        {
-            SetModeHide();
-        }
-
-        #endregion
-
         #region Public Methods
 
         public void SetModeShow(string message)

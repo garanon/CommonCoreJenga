@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JengaApp.UI;
@@ -53,11 +54,20 @@ namespace JengaApp
             // Attempt to load a cached version.
             if (UserProfile.TryLoadCachedGradeData(out var jsonData))
             {
-                // Initialise the stacks
-                InitialiseJengaStacksFromJson(jsonData);
+                // Artifical delay.
+                IEnumerator waitRoutine(Action onComplete)
+                {
+                    yield return new WaitForSeconds(1f);
+                    onComplete?.Invoke();
+                }
+                StartCoroutine(waitRoutine(() =>
+                {
+                    UIManager.Instance.SetModeHideMessagePanel();
+                    Debug.Log("Network unreachable. Loaded data from file.");
 
-                UIManager.Instance.SetModeHideMessagePanel();
-                Debug.Log("Loaded data from file.");
+                    // Initialise the stacks
+                    InitialiseJengaStacksFromJson(jsonData);
+                }));
             }
             else
             {
