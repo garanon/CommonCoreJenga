@@ -27,7 +27,7 @@ namespace JengaApp.UI
             gameModeSidebar.Initialise(gameModes);
         }
 
-        public void SetModeShowBlockData(StandardizedGradeJengaBlock block)
+        public void SetModeShowBlockData(JengaBlock block)
         {
             blockDataPanel.SetModeShow(block);
         }

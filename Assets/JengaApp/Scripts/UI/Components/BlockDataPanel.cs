@@ -8,7 +8,7 @@ namespace JengaApp.UI.Components
 
         [SerializeField] private TMPro.TextMeshProUGUI textArea;
 
-        private StandardizedGradeJengaBlock selectedBlock;
+        private JengaBlock selectedBlock;
 
         #endregion
 
@@ -23,16 +23,27 @@ namespace JengaApp.UI.Components
 
         #region Public Methods
 
-        public void SetModeShow(StandardizedGradeJengaBlock block)
+        public void SetModeShow(JengaBlock block)
         {
+            // Disable current block.
+            selectedBlock?.SetModeSelected(false);
+
+            // Set up new block.
+            block.SetModeSelected(true);
+            textArea.text = GetBlockDataText(block.Config as StandardizedGradeJengaBlock);
             selectedBlock = block;
-            textArea.text = GetBlockDataText(block);
+
+            // Display the panel.
             this.gameObject.SetActive(true);
         }
 
         public void SetModeHide()
         {
+            // Disable current block.
+            selectedBlock?.SetModeSelected(false);
             selectedBlock = null;
+
+            // Hide the panel.
             this.gameObject.SetActive(false);
         }
 

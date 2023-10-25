@@ -52,6 +52,7 @@ MonoBehaviour:
   glassMaterial: {fileID: 2100000, guid: 2a930f35c861e48c4ba8d688e9e2fd3d, type: 2}
   woodMaterial: {fileID: 2100000, guid: db71ff74551a4482681d8e6e467555e2, type: 2}
   stoneMaterial: {fileID: 2100000, guid: ff8c299b638144ea389fc5590aae881c, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: fc338b18e8cb24c95afba3366d1c8709, type: 2}
 --- !u!54 &2953399119518079472
 Rigidbody:
   m_ObjectHideFlags: 0

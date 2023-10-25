@@ -53,7 +53,7 @@ namespace JengaApp
                         // Only show the information if the stack is active.
                         if (stacksController.ActiveStack.JengaBlocks.Contains(jengaBlock))
                         {
-                            UIManager.Instance.SetModeShowBlockData(jengaBlock.Config as StandardizedGradeJengaBlock);
+                            UIManager.Instance.SetModeShowBlockData(jengaBlock);
                         }
                     }
                 }

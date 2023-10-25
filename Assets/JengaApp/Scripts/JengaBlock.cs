@@ -19,6 +19,7 @@ namespace JengaApp
         [SerializeField] private Material glassMaterial;
         [SerializeField] private Material woodMaterial;
         [SerializeField] private Material stoneMaterial;
+        [SerializeField] private Material selectedMaterial;
 
         #endregion
 
@@ -27,7 +28,7 @@ namespace JengaApp
         public void Initialise(IJengaBlockData config)
         {
             Config = config;
-            SetMode(config.BlockType);
+            SetModeBlockType(config.BlockType);
 
         }
 
@@ -44,9 +45,9 @@ namespace JengaApp
             rigidbody.Sleep();
         }
 
-        public void SetMode(BlockType blockType)
+        public void SetModeBlockType(BlockType type)
         {
-            switch (blockType)
+            switch (type)
             {
                 case BlockType.Invalid:
                     meshRenderer.material = defaultMaterial;
@@ -61,6 +62,14 @@ namespace JengaApp
                     meshRenderer.material = stoneMaterial;
                     break;
             }
+        }
+
+        public void SetModeSelected(bool isSelected)
+        {
+            if (isSelected)
+                meshRenderer.material = selectedMaterial;
+            else
+                SetModeBlockType(Config.BlockType);
         }
 
         #endregion
