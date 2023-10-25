@@ -26,7 +26,7 @@ namespace JengaApp.UI.Components
         public void SetModeShow(StandardizedGradeJengaBlock block)
         {
             selectedBlock = block;
-            Debug.Log($"Block selected: {block}");
+            textArea.text = GetBlockDataText(block);
             this.gameObject.SetActive(true);
         }
 
@@ -34,6 +34,18 @@ namespace JengaApp.UI.Components
         {
             selectedBlock = null;
             this.gameObject.SetActive(false);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private string GetBlockDataText(StandardizedGradeJengaBlock block)
+        {
+            return $"{block.Grade}: {block.Domain}" +
+                    $"\n{block.Cluster}" +
+                    $"\n{block.StandardId}: {block.StandardDescription}";
+
         }
 
         #endregion

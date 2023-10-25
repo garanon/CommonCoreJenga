@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using JengaApp.UI;
 using JengaApp.Utilities;
 using UnityEngine;
@@ -11,9 +12,13 @@ namespace JengaApp
 
         public List<JengaStack> JengaStacks { get; private set; } = new();
 
+        public JengaStack ActiveStack { get; private set; }
+
         #endregion
 
         #region Fields
+
+        [SerializeField] private CameraController cameraController;
 
         [Header("Object pools")]
         [SerializeField] private JengaStackPool stackObjectPool;
@@ -41,12 +46,23 @@ namespace JengaApp
                 ++stackIndex;
             }
 
+            var targetStack = JengaStacks.FirstOrDefault();
+            if (targetStack != null)
+            {
+                SetStackActive(targetStack);
+            }
+
             UIManager.Instance.InitialiseGradeSelection(this);
         }
 
         public void SetStackActive(JengaStack stack)
         {
-            Debug.Log($"Active stack: {stack}");
+            if (ActiveStack != stack)
+            {
+                ActiveStack = stack;
+                cameraController.SetTarget(stack.transform);
+                UIManager.Instance.SetModeHideBlockData();
+            }
         }
 
         #endregion

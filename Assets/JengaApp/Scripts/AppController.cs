@@ -19,6 +19,7 @@ namespace JengaApp
 
         private void Start()
         {
+            UIManager.Instance.SetModeShowMessagePanel("Downloading grade data...");
             Debug.Log("Fetching grade data...");
             DownloadGradeData(OnDataDownloadSuccess, OnDataDownloadFailed);
         }
@@ -34,6 +35,7 @@ namespace JengaApp
 
         private void OnDataDownloadSuccess(string jsonData)
         {
+            UIManager.Instance.SetModeHideMessagePanel();
             Debug.Log("Grade data downloaded.");
 
             // Store a version locally.
@@ -45,19 +47,21 @@ namespace JengaApp
 
         private void OnDataDownloadFailed(string errorMessage)
         {
-            Debug.LogError($"Failed to download data {errorMessage}.");
-            Debug.Log("Checking for a cached version...");
+            UIManager.Instance.SetModeShowMessagePanel("Failed to download data. Checking for a local version...");
+            Debug.LogError($"Failed to download data {errorMessage}. Checking for a cached version...");
 
             // Attempt to load a cached version.
             if (UserProfile.TryLoadCachedGradeData(out var jsonData))
             {
-                Debug.Log("Loaded data from file.");
-
                 // Initialise the stacks
                 InitialiseJengaStacksFromJson(jsonData);
+
+                UIManager.Instance.SetModeHideMessagePanel();
+                Debug.Log("Loaded data from file.");
             }
             else
             {
+                UIManager.Instance.SetModeShowMessagePanel("Failed to fetch grade data. Try again later.");
                 Debug.LogError($"Failed to fetch grade data.");
             }
         }
