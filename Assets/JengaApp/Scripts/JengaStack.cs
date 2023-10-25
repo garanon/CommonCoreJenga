@@ -8,6 +8,7 @@ namespace JengaApp
     {
         #region Properties
 
+        public JengaStackConfig Config => config;
         public List<JengaBlock> JengaBlocks { get; private set; } = new();
 
         #endregion

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JengaApp.UI;
 using JengaApp.Utilities;
 using UnityEngine;
 
@@ -39,6 +40,13 @@ namespace JengaApp
 
                 ++stackIndex;
             }
+
+            UIManager.Instance.InitialiseGradeSelection(this);
+        }
+
+        public void SetStackActive(JengaStack stack)
+        {
+            Debug.Log($"Active stack: {stack}");
         }
 
         #endregion

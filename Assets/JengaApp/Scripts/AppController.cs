@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JengaApp.UI;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -88,6 +89,10 @@ namespace JengaApp
 
             // Initialise the jenga stacks.
             stacksController.Initialise(configs.ToArray());
+
+            // Initialise game modes
+            var gameModes = GetComponents<GameMode>();
+            UIManager.Instance.InitialiseGameModes(gameModes.ToArray());
         }
 
         #endregion
